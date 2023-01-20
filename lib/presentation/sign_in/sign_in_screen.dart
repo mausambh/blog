@@ -19,7 +19,7 @@ class _LoginFormClassState extends State<LoginFormClass> {
   final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool _isObscure = true;
+  bool isObscure = true;
   final SignInController _signInController = Get.put(SignInController());
 
   @override
@@ -76,7 +76,7 @@ class _LoginFormClassState extends State<LoginFormClass> {
                         ),
                         const SizedBox(height: 25),
                         TextFormField(
-                          obscureText: _isObscure,
+                          obscureText: isObscure,
                           decoration: InputDecoration(
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
@@ -89,13 +89,11 @@ class _LoginFormClassState extends State<LoginFormClass> {
                             filled: true,
                             hintText: 'Password',
                             suffixIcon: IconButton(
-                              icon: Icon(_isObscure
+                              icon: Icon(isObscure
                                   ? Icons.visibility
                                   : Icons.visibility_off),
                               onPressed: () {
-                                setState(() {
-                                  _isObscure = !_isObscure;
-                                });
+                                _signInController.changeObscure();
                               },
                             ),
                           ),

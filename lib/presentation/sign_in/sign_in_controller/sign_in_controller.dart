@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
 class SignInController extends GetxController {
-  RxBool _isObscure = true.obs;
+  RxBool isObscure = true.obs;
   changeObscure() {
-    _isObscure.value = !_isObscure.value;
+    isObscure.value = !isObscure.value;
   }
 }
