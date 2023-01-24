@@ -1,5 +1,8 @@
+import 'package:blog/presentation/home/components/home.dart';
+import 'package:blog/presentation/home/dashboard.dart';
 import 'package:flutter/material.dart';
 
+import '../profile/profile_details.dart';
 import '../sign_in/sign_in_screen.dart';
 import '../sign_up/sign_up_screen.dart';
 
@@ -8,7 +11,9 @@ import '../sign_up/sign_up_screen.dart';
 class Routes {
   static const String loginScreen = "/";
   static const String registerScreen = "/loginOption";
-  static const String thirdScreen = "/thirdScreen";
+  static const String dashboardScreen = "/dashboardScreen";
+  static const String profileScreen = '/profileScreen';
+  static const String mainScreen = '/mainScreen';
   // static const String setMobileNumberScreen = "/setMobileNumberScreen";
   // static const String dialNumber = "/dialNumber";
 }
@@ -22,8 +27,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const LoginFormClass());
       case Routes.registerScreen:
         return MaterialPageRoute(builder: (_) => const RegisterFormClass());
-      case Routes.thirdScreen:
-      // return MaterialPageRoute(builder: (_) => const ThirdScreen());
+      case Routes.dashboardScreen:
+        return MaterialPageRoute(builder: (_) => MainPage());
+      case Routes.mainScreen:
+        return MaterialPageRoute(builder: (_) => const Dashboard());
+      case Routes.profileScreen:
+        return MaterialPageRoute(builder: (_) => const ProfileDetails());
       // case Routes.thirdScreen:
       //   return MaterialPageRoute(builder: (_) => const ThirdScreen());
       default:

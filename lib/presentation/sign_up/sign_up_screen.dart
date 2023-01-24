@@ -1,7 +1,10 @@
 import 'package:blog/presentation/resources/strings_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../resources/routes_manager.dart';
+import '../sign_in/sign_in_controller/sign_in_controller.dart';
+import 'sign_up_controller/sign_up_controller.dart';
 // import 'package:login/extensions.dart';
 
 class RegisterFormClass extends StatefulWidget {
@@ -14,7 +17,10 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
   final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool _isObscure = true;
+  final SignInController _signInController = Get.put(SignInController());
+  final SignUpController _signUpController = Get.put(SignUpController());
+
+  // bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -66,37 +72,67 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                       },
                     ),
                     const SizedBox(height: 25),
-                    TextFormField(
-                      obscureText: _isObscure,
-                      decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                    Obx(
+                      () => TextFormField(
+                        obscureText: _signInController.isObscure.value,
+                        decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          fillColor: Colors.grey.shade200,
+                          filled: true,
+                          hintText: 'Password',
+                          suffixIcon: IconButton(
+                            icon: Icon(!_signInController.isObscure.value
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                            onPressed: () {
+                              _signInController.changeObscure();
+                            },
+                          ),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey.shade400),
-                        ),
-                        fillColor: Colors.grey.shade200,
-                        filled: true,
-                        hintText: 'Password',
-                        suffixIcon: IconButton(
-                          icon: Icon(_isObscure
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              _isObscure = !_isObscure;
-                            });
-                          },
-                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter password';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter password';
-                        }
-                        return null;
-                      },
                     ),
-
+                    const SizedBox(height: 25),
+                    Obx(
+                      () => TextFormField(
+                        obscureText: _signUpController.isObscure.value,
+                        decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          fillColor: Colors.grey.shade200,
+                          filled: true,
+                          hintText: 'Confirm Password',
+                          suffixIcon: IconButton(
+                            icon: Icon(!_signUpController.isObscure.value
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                            onPressed: () {
+                              _signUpController.changeObscure();
+                            },
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter password';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
                     const SizedBox(height: 25),
                     TextFormField(
                       decoration: InputDecoration(

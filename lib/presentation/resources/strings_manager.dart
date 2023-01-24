@@ -1,32 +1,42 @@
 class AppStrings {
-  //App title
-  static const String appTitle = "ABC Blog";
+  // App title
+  static const String appTitle = "Blog";
   static const String emptyString = "";
-  //route
-  static const String noRouteFound = "No Route Found";
+
+  // route
+  static const String noRouteFound = "";
 
   //intro screen Text
   static const String continueText = "Continue";
-  static const String introScreenText1 = "Welcome to ABC Blog";
-  static const String introScreenText2 = "We provide blog platform to people";
-  // sign in
+  static const String introScreenText1 = "Welcome to BlogBuddies, Let’s write!";
+
+  // sign in and login
   static const String signIn = "Sign In";
   static const String welcomeBack = "Welcome Back";
-  static const String signInPageText = "Sign in with your email and password";
+  static const String signInPageText =
+      "Sign in with your email and password  \nor continue with social media";
   static const String rememberMe = "Remember me";
-  static const String forgotPassword = "Forgot Password?";
+  static const String forgotPassword = "ForgotPassword";
   static const String password = "Password";
   static const String enterPassword = "Enter your password";
   static const String email = "Email";
   static const String enterEmail = "Enter your email";
+  static const String username = "Username";
+  static const String enterUsername = "Enter your username";
   static const String signUp = "Sign Up";
   static const String noAccount = "Don’t have an account? ";
-  static const String alreadyAccount = "Already a Member? LOG IN HERE";
   static const String agreeWithConditions =
       'By continuing your confirm that you agree \nwith our Term and Condition';
   static const String confirmPassword = "Confirm Password";
   static const String reenterYourPassword = "Re-enter your password";
   static const String loginSuccess = "Login Success";
+  static const String alreadyAccount = "Already have an account? LOGIN Here";
+
+  // login
+  static const String logIn = "Log In";
+  static const String forgotPass = "Forgot Password?";
+  static const String alreadyMember = "Already a member?? log In Now";
+  static const String or = "-OR-";
 
   //Error
   static const String kEmailNullError = "Please Enter your email";
@@ -38,4 +48,28 @@ class AppStrings {
   static const String kMatchPassError = "Passwords don't match";
   static const String kNamelNullError = "Please Enter your name";
   static const String kPhoneNumberNullError = "Please Enter your phone number";
+  static const String kAddressNullError = "Please Enter your address";
+  // User Profile
+  static const String profileDetails = "Profile Details";
+  static const String profileEdit = "Edit";
+  static const String userName = "Name";
+  static const String userRole = "Role";
+  static const String userComplay = "Company";
+  static const String nameHint = "Enter your full name";
+  static const String userLocation = "Location";
+
+  // User Profile Private info
+  static const String privateInfo = "Private Information";
+  static const String userEmail = "Email";
+  static const String userPhone = "Contact Number";
+  static const String phonHint = "Enter valid phone number";
+  static const String userAddress = "Address";
+
+  // Connections
+  static const String connections = "Connections";
+
+  // Notifications
+  static const String notifications = "Notifications";
+  static const String today = "Today";
+  static const String yesterday = "Yesterday";
 }

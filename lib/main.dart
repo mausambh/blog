@@ -1,3 +1,4 @@
+import 'package:blog/presentation/resources/color_manager.dart';
 import 'package:blog/presentation/resources/routes_manager.dart';
 import 'package:blog/presentation/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      color: ColorManager.kPrimaryColor,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.teal,

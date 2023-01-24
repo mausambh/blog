@@ -19,7 +19,7 @@ class _LoginFormClassState extends State<LoginFormClass> {
   final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool isObscure = true;
+
   final SignInController _signInController = Get.put(SignInController());
 
   @override
@@ -28,6 +28,7 @@ class _LoginFormClassState extends State<LoginFormClass> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          backgroundColor: ColorManager.kPrimaryColor,
           title: const Text(
             "Login Page",
             style: TextStyle(
@@ -64,7 +65,8 @@ class _LoginFormClassState extends State<LoginFormClass> {
                             ),
                             fillColor: Colors.grey.shade200,
                             filled: true,
-                            hintText: 'Username',
+                            labelText: AppStrings.username,
+                            hintText: AppStrings.enterUsername,
                           ),
                           // The validator receives the text that the user has entered.
                           validator: (value) {
@@ -75,59 +77,97 @@ class _LoginFormClassState extends State<LoginFormClass> {
                           },
                         ),
                         const SizedBox(height: 25),
-                        TextFormField(
-                          obscureText: isObscure,
-                          decoration: InputDecoration(
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                        Obx(
+                          () => TextFormField(
+                            obscureText: _signInController.isObscure.value,
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey.shade400),
+                              ),
+                              fillColor: Colors.grey.shade200,
+                              filled: true,
+                              labelText: AppStrings.enterPassword,
+                              hintText: AppStrings.password,
+                              suffixIcon: IconButton(
+                                icon: Icon(!_signInController.isObscure.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                onPressed: () {
+                                  _signInController.changeObscure();
+                                },
+                              ),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey.shade400),
-                            ),
-                            fillColor: Colors.grey.shade200,
-                            filled: true,
-                            hintText: 'Password',
-                            suffixIcon: IconButton(
-                              icon: Icon(isObscure
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
-                              onPressed: () {
-                                _signInController.changeObscure();
-                              },
-                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter password';
+                              }
+                              return null;
+                            },
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter password';
-                            }
-                            return null;
-                          },
                         ),
                         const SizedBox(height: 25),
                         GestureDetector(
-                          child: OutlinedButton(
+                          child: TextButton(
                             onPressed: () {
-                              // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate()) {
-                                // Navigator.pop(context, Routes.thirdScreen);
                                 Navigator.pushReplacementNamed(
-                                    context, Routes.thirdScreen);
-                                //   // If the form is valid, display a snackbar. In the real world,
-                                //   // you'd often call a server or save the information in a database.
-
+                                    context, Routes.mainScreen);
                               }
-                              // Navigator.pop(context);
                             },
-                            style: OutlinedButton.styleFrom(
-                                backgroundColor: ColorManager.kPrimaryColor),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all<EdgeInsets>(
+                                  const EdgeInsets.only(
+                                      right: 40,
+                                      left: 40,
+                                      top: 15,
+                                      bottom: 15)),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  ColorManager.kSecondaryColor),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                // side: const BorderSide()),
+                              )),
+                            ),
                             child: const Text(
                               AppStrings.signIn,
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                                  TextStyle(color: Colors.black, fontSize: 20),
                             ),
                           ),
                         ),
+
+                        // GestureDetector(
+                        //   child: ElevatedButton(
+                        //     onPressed: () {
+                        //       // Validate returns true if the form is valid, or false otherwise.
+                        //       if (_formKey.currentState!.validate()) {
+                        //         // Navigator.pop(context, Routes.thirdScreen);
+                        //         Navigator.pushReplacementNamed(
+                        //             context, Routes.dashboardScreen);
+                        //         //   // If the form is valid, display a snackbar. In the real world,
+                        //         //   // you'd often call a server or save the information in a database.
+
+                        //       }
+                        //       // Navigator.pop(context);
+                        //     },
+                        //     style: ElevatedButton.styleFrom(
+                        //       backgroundColor: ColorManager.kSecondaryColor,
+                        //       padding: const EdgeInsets.only(
+                        //           left: 50, right: 50, top: 10, bottom: 10),
+                        //     ),
+                        //     child: const Text(
+                        //       AppStrings.signIn,
+                        //       style:
+                        //           TextStyle(color: Colors.black, fontSize: 20),
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(height: 25),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),
