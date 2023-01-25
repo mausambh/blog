@@ -57,6 +57,10 @@ class AppStrings {
   static const String userComplay = "Company";
   static const String nameHint = "Enter your full name";
   static const String userLocation = "Location";
+  static const String blogTitle = "Blog Title";
+  static const String blogTitleHint = "Enter your blog's title";
+  static const String blogDesc = "Blog Description";
+  static const String blogDescHint = "Enter your blog's description";
 
   // User Profile Private info
   static const String privateInfo = "Private Information";

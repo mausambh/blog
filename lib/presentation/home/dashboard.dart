@@ -1,6 +1,7 @@
 import 'package:blog/presentation/home/components/home.dart';
 import 'package:flutter/material.dart';
 
+import '../../blog/create_blog.dart';
 import '../profile/profile_details.dart';
 
 class Dashboard extends StatefulWidget {
@@ -15,7 +16,7 @@ class DashboardState extends State<Dashboard> {
   final List<Widget> _widgetOptions = <Widget>[
     MainPage(),
     const ProfileDetails(),
-    const SizedBox(),
+    const CreateBlog(),
     const SizedBox(),
     const SizedBox(),
   ];
