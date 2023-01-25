@@ -125,16 +125,16 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   ),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                           height: 50,
                           child: Align(
                               alignment: Alignment.centerLeft,
                               child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(8.0),
                                   child: Text(
                                     AppStrings.userName,
                                     style: TextStyle(
-                                      color: ColorManager.kTextColor,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                     ),

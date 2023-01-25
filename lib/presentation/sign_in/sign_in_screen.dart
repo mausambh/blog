@@ -90,8 +90,8 @@ class _LoginFormClassState extends State<LoginFormClass> {
                               ),
                               fillColor: Colors.grey.shade200,
                               filled: true,
-                              labelText: AppStrings.enterPassword,
-                              hintText: AppStrings.password,
+                              labelText: AppStrings.password,
+                              hintText: AppStrings.enterPassword,
                               suffixIcon: IconButton(
                                 icon: Icon(!_signInController.isObscure.value
                                     ? Icons.visibility

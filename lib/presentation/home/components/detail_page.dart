@@ -1,123 +1,159 @@
 import 'package:blog/models/feed_model.dart';
+import 'package:blog/presentation/widgets/status.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailPage extends StatelessWidget {
-  final FeedModel? feedModel;
-
-  const DetailPage({Key? key, this.feedModel}) : super(key: key);
+  final FeedModel? feed;
+  const DetailPage({super.key, this.feed});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          topContent(context),
-          bottomContent(context),
-        ],
-      ),
-    );
-  }
-
-  Widget topContent(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-            padding: const EdgeInsets.only(left: 10.0),
-            height: MediaQuery.of(context).size.height * 0.5,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                  feedModel!.img ??
-                      "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80",
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(children: [
+            const Status(),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 18.0, top: 10),
+                  child: Material(
+                    elevation: 10,
+                    borderRadius: BorderRadius.circular(140),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(140)),
+                      height: 58,
+                      width: 60,
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                              height: 78,
+                              width: 74,
+                              margin: const EdgeInsets.only(
+                                  left: 0, right: 0, top: 0, bottom: 0),
+                              padding: const EdgeInsets.all(0),
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                  borderRadius: BorderRadius.circular(140)),
+                              child: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                feed!.img ??
+                                    'https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=2000',
+                              ))),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                fit: BoxFit.cover,
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0, top: 13),
+                    child: Text(
+                      feed!.author ?? 'Sound Byte',
+                      style: GoogleFonts.lato(
+                          color: Colors.grey[700],
+                          fontSize: 16,
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Text(
+                      feed!.time ?? '1 hr',
+                      style: GoogleFonts.lato(
+                          color: Colors.grey[500],
+                          fontSize: 15,
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.normal),
+                    ),
+                  ),
+                ]),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
+              child: Text(
+                feed!.description ??
+                    'Was great meeting up with Anna Ferguson and Dave Bishop at the breakfast talk!',
+                style: GoogleFonts.lato(
+                    color: Colors.grey[600],
+                    fontSize: 15,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.normal),
+                textAlign: TextAlign.justify,
               ),
-            )),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.5,
-          padding: const EdgeInsets.all(40.0),
-          width: MediaQuery.of(context).size.width,
-          decoration:
-              const BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
-          child: Center(
-            child: topContentText(),
-          ),
-        ),
-        Positioned(
-          left: 8.0,
-          top: 60.0,
-          child: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: const Icon(Icons.arrow_back, color: Colors.white),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget topContentText() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const SizedBox(height: 120.0),
-        const Icon(
-          Icons.directions_car,
-          color: Colors.white,
-          size: 40.0,
-        ),
-        const SizedBox(
-          width: 90.0,
-          child: Divider(color: Colors.green),
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          feedModel!.author!,
-          style: const TextStyle(color: Colors.white, fontSize: 45.0),
-        ),
-        const SizedBox(height: 30.0),
-      ],
-    );
-  }
-
-  Widget bottomContentText() {
-    return Text(
-      feedModel!.description!,
-      style: const TextStyle(fontSize: 18.0),
-    );
-  }
-
-  Widget bottomText() {
-    return Text(
-      "Ratings: ${feedModel!.time!}",
-      style: const TextStyle(fontSize: 18.0),
-    );
-  }
-
-  Widget readButton(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        width: MediaQuery.of(context).size.width,
-        child: MaterialButton(
-          onPressed: () => {},
-          color: const Color.fromRGBO(58, 66, 86, 1.0),
-          child: const Text("TAKE THIS LESSON",
-              style: TextStyle(color: Colors.white)),
-        ));
-  }
-
-  Widget bottomContent(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(40.0),
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            bottomContentText(),
-            bottomText(),
-            readButton(context)
-          ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0, right: 18, top: 15),
+              child: Material(
+                  borderRadius: const BorderRadius.all(Radius.circular(40)),
+                  elevation: 6,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    child: Image.network(feed!.img ??
+                        'https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
+                  )),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 2, left: 28.0),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5.0),
+                        child: Image.asset(
+                          'assets/icons/like.png',
+                          height: 35,
+                        ),
+                      ),
+                      Text(
+                        feed!.like ?? '45',
+                        style: GoogleFonts.averageSans(
+                            color: Colors.grey[700],
+                            fontSize: 22,
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.normal),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 18, right: 22.0),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 1.0),
+                        child: Image.network(
+                          'https://aux.iconspalace.com/uploads/comment-icon-256.png',
+                          height: 40,
+                        ),
+                      ),
+                      Text(
+                        feed!.comments ?? '45',
+                        style: GoogleFonts.averageSans(
+                            color: Colors.grey[700],
+                            fontSize: 22,
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.normal),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+          ]),
         ),
       ),
     );

@@ -35,39 +35,36 @@ class DashboardState extends State<Dashboard> {
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  // color: Colors.grey[500],
-                ),
-                label: "",
-                backgroundColor: Colors.green),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person,
-                ),
-                label: "",
-                backgroundColor: Colors.yellow),
-            BottomNavigationBarItem(
               icon: Icon(
-                Icons.search,
+                Icons.home,
+                // color: Colors.grey[500],
               ),
               label: "",
-              backgroundColor: Colors.blue,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+              ),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add,
+              ),
+              label: "",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.location_on),
               label: "",
-              backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.notification_important_outlined,
               ),
               label: "",
-              backgroundColor: Colors.blue,
             ),
           ],
-          type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.shifting,
           backgroundColor: Colors.white,
           // selectedItemColor: Colors.orange,
 

@@ -2,6 +2,8 @@ import 'package:blog/models/feed_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../home/components/detail_page.dart';
+
 class FeedUI extends StatelessWidget {
   final FeedModel? feed;
   const FeedUI({super.key, this.feed});
@@ -72,15 +74,28 @@ class FeedUI extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-          child: Text(
-            feed!.description ??
-                'Was great meeting up with Anna Ferguson and Dave Bishop at the breakfast talk!',
-            style: GoogleFonts.lato(
-                color: Colors.grey[600],
-                fontSize: 15,
-                letterSpacing: 1,
-                fontWeight: FontWeight.normal),
-            textAlign: TextAlign.justify,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DetailPage(
+                          feed: feed!,
+                        )),
+              );
+            },
+            child: Text(
+              feed!.description ??
+                  'Was great meeting up with Anna Ferguson and Dave Bishop at the breakfast talk!',
+              style: GoogleFonts.lato(
+                  color: Colors.grey[600],
+                  fontSize: 15,
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.normal),
+              textAlign: TextAlign.justify,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
         Padding(

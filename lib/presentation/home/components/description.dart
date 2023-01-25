@@ -19,8 +19,6 @@ class Description extends StatelessWidget {
           feed!.description!,
           style:
               TextStyle(fontWeight: FontWeight.w600, color: Colors.grey[700]),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -33,14 +31,14 @@ class Description extends StatelessWidget {
               ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsets.only(right: 8),
+                padding: const EdgeInsets.only(right: 8, bottom: 50),
                 child: OutlinedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => DetailPage(
-                                feedModel: feed!,
+                                feed: feed!,
                               )),
                     );
                   },
