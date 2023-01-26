@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:blog/presentation/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,17 +16,18 @@ class CreateBlog extends StatefulWidget {
 
 class _CreateBlogState extends State<CreateBlog> {
   // late File _image;
-  XFile? _imageFile;
+  File? imageFile;
+
+  getImage() async {
+    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageFile = File(image!.path);
+    });
+    log("image path ${imageFile!.path}");
+  }
 
   @override
   Widget build(BuildContext context) {
-    getImage() async {
-      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      setState(() {
-        _imageFile = image;
-      });
-    }
-
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -50,6 +54,16 @@ class _CreateBlogState extends State<CreateBlog> {
               const SizedBox(
                 height: 10,
               ),
+              imageFile == null
+                  ? const SizedBox(
+                      height: 100,
+                    )
+                  : Container(
+                      child: Image.file(
+                        imageFile!,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
               GestureDetector(
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),

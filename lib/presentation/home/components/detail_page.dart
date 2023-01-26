@@ -1,5 +1,4 @@
 import 'package:blog/models/feed_model.dart';
-import 'package:blog/presentation/widgets/status.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,7 +12,6 @@ class DetailPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(children: [
-            const Status(),
             Row(
               children: [
                 Padding(
