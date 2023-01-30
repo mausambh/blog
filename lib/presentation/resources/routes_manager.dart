@@ -28,7 +28,7 @@ class RouteGenerator {
       case Routes.registerScreen:
         return MaterialPageRoute(builder: (_) => const RegisterFormClass());
       case Routes.dashboardScreen:
-        return MaterialPageRoute(builder: (_) => MainPage());
+        return MaterialPageRoute(builder: (_) => const MainPage());
       case Routes.mainScreen:
         return MaterialPageRoute(builder: (_) => const Dashboard());
       case Routes.profileScreen:

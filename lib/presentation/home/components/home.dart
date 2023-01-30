@@ -3,8 +3,35 @@ import 'package:blog/presentation/widgets/feed_widget.dart';
 import 'package:blog/presentation/widgets/status.dart';
 import 'package:flutter/material.dart';
 
-class MainPage extends StatelessWidget {
-  MainPage({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  // const ProfileDetails({Key? key}) : super(key: key);
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Are you sure?'),
+            content: const Text('Do you want to exit the app?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
   final List<FeedModel> feeds = [
     const FeedModel(
       img:
@@ -58,29 +85,31 @@ Morbi eu magna bibendum, finibus tortor ac, pharetra leo. In ac euismod sem. Mau
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            const Status(),
-            const SizedBox(
-              height: 20,
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
+          body: SafeArea(
+            child: Column(
+              children: [
+                const Status(),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  child: ListView.builder(
+                      itemCount: feeds.length,
+                      itemBuilder: (context, index) => FeedUI(
+                            feed: feeds[index],
+                            // img: images[index].img,
+                            // title: images[index].title,
+                            // description: images[index].description,
+                            // ratings: images[index].ratings,
+                          )),
+                ),
+              ],
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
-              child: ListView.builder(
-                  itemCount: feeds.length,
-                  itemBuilder: (context, index) => FeedUI(
-                        feed: feeds[index],
-                        // img: images[index].img,
-                        // title: images[index].title,
-                        // description: images[index].description,
-                        // ratings: images[index].ratings,
-                      )),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

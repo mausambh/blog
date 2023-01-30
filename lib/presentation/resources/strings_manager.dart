@@ -16,7 +16,7 @@ class AppStrings {
   static const String signInPageText =
       "Sign in with your email and password  \nor continue with social media";
   static const String rememberMe = "Remember me";
-  static const String forgotPassword = "ForgotPassword";
+  static const String forgotPassword = "Forgot Password?";
   static const String password = "Password";
   static const String enterPassword = "Enter your password";
   static const String email = "Email";

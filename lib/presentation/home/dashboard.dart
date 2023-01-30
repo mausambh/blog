@@ -14,7 +14,7 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    MainPage(),
+    const MainPage(),
     const ProfileDetails(),
     const CreateBlog(),
     const SizedBox(),

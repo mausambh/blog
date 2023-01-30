@@ -16,10 +16,6 @@ class LoginFormClass extends StatefulWidget {
 }
 
 class _LoginFormClassState extends State<LoginFormClass> {
-  final TextEditingController username = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
   final SignInController _signInController = Get.put(SignInController());
 
   @override
@@ -40,7 +36,7 @@ class _LoginFormClassState extends State<LoginFormClass> {
         backgroundColor: Colors.grey[300],
         body: SafeArea(
           child: Form(
-            key: _formKey,
+            key: _signInController.formKey,
             child: ListView(
               children: [
                 const SizedBox(height: 50),
@@ -55,6 +51,7 @@ class _LoginFormClassState extends State<LoginFormClass> {
                     child: Column(
                       children: [
                         TextFormField(
+                          controller: _signInController.username,
                           decoration: InputDecoration(
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
@@ -79,6 +76,7 @@ class _LoginFormClassState extends State<LoginFormClass> {
                         const SizedBox(height: 25),
                         Obx(
                           () => TextFormField(
+                            controller: _signInController.password,
                             obscureText: _signInController.isObscure.value,
                             decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(
@@ -113,9 +111,9 @@ class _LoginFormClassState extends State<LoginFormClass> {
                         GestureDetector(
                           child: TextButton(
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.mainScreen);
+                              if (_signInController.formKey.currentState!
+                                  .validate()) {
+                                _signInController.mapInputsLogin();
                               }
                             },
                             style: ButtonStyle(
@@ -141,33 +139,6 @@ class _LoginFormClassState extends State<LoginFormClass> {
                             ),
                           ),
                         ),
-
-                        // GestureDetector(
-                        //   child: ElevatedButton(
-                        //     onPressed: () {
-                        //       // Validate returns true if the form is valid, or false otherwise.
-                        //       if (_formKey.currentState!.validate()) {
-                        //         // Navigator.pop(context, Routes.thirdScreen);
-                        //         Navigator.pushReplacementNamed(
-                        //             context, Routes.dashboardScreen);
-                        //         //   // If the form is valid, display a snackbar. In the real world,
-                        //         //   // you'd often call a server or save the information in a database.
-
-                        //       }
-                        //       // Navigator.pop(context);
-                        //     },
-                        //     style: ElevatedButton.styleFrom(
-                        //       backgroundColor: ColorManager.kSecondaryColor,
-                        //       padding: const EdgeInsets.only(
-                        //           left: 50, right: 50, top: 10, bottom: 10),
-                        //     ),
-                        //     child: const Text(
-                        //       AppStrings.signIn,
-                        //       style:
-                        //           TextStyle(color: Colors.black, fontSize: 20),
-                        //     ),
-                        //   ),
-                        // ),
                         const SizedBox(height: 25),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),

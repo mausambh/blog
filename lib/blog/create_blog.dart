@@ -58,11 +58,9 @@ class _CreateBlogState extends State<CreateBlog> {
                   ? const SizedBox(
                       height: 100,
                     )
-                  : Container(
-                      child: Image.file(
-                        imageFile!,
-                        fit: BoxFit.cover,
-                      ),
+                  : Image.file(
+                      imageFile!,
+                      fit: BoxFit.cover,
                     ),
               GestureDetector(
                 child: Container(

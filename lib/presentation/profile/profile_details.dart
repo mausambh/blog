@@ -12,278 +12,316 @@ class ProfileDetails extends StatefulWidget {
 
 class _ProfileDetailsState extends State<ProfileDetails> {
   // const ProfileDetails({Key? key}) : super(key: key);
-  Future<bool> _onWillPop() async {
-    return (await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Are you sure?'),
-            content: const Text('Do you want to exit the app?'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('No'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Yes'),
-              ),
-            ],
-          ),
-        )) ??
-        false;
-  }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child: SafeArea(
-          child: Scaffold(
-              body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 50,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 22.0),
-                      child: Text(
-                        'Profile Details',
-                        style: GoogleFonts.lato(
-                            color: Colors.grey[800],
-                            fontSize: 26,
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.bold),
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Profile Details',
+            style: GoogleFonts.lato(
+                color: Colors.white,
+                fontSize: 26,
+                letterSpacing: 0,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: ColorManager.kPrimaryColor,
+      ),
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 20, top: 10),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.only(
+                          top: 10, bottom: 10, right: 10, left: 10),
+                      backgroundColor: ColorManager.kPrimaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(
+                        Icons.edit,
+                        size: 16,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40))),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 13, right: 20, top: 10, bottom: 10),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                                size: 16,
-                              ),
-                              const SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                'Edit',
-                                style: GoogleFonts.lato(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
-                          ),
-                        ),
+                      SizedBox(
+                        width: 5,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Edit',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
                 ),
-                Center(
+              ),
+            ],
+          ),
+          Center(
+            child: Container(
+              decoration: const BoxDecoration(color: Colors.white),
+              // height: 180,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 18.0, top: 10),
+                child: Material(
+                  elevation: 10,
+                  borderRadius: BorderRadius.circular(140),
                   child: Container(
-                    decoration: const BoxDecoration(color: Colors.white),
-                    height: 180,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(140)),
+                    height: 100,
+                    width: 100,
                     child: Stack(
                       children: <Widget>[
                         Container(
                             height: 100,
                             width: 100,
+                            margin: const EdgeInsets.only(
+                                left: 0, right: 0, top: 0, bottom: 0),
+                            padding: const EdgeInsets.all(0),
                             decoration: BoxDecoration(
                                 border:
                                     Border.all(color: Colors.white, width: 2),
                                 borderRadius: BorderRadius.circular(140)),
                             child: const CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400',
-                              ),
-                            )),
+                                backgroundImage: NetworkImage(
+                              'https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=2000',
+                            ))),
                       ],
                     ),
                   ),
                 ),
-                Container(
-                  height: 210,
-                  margin: const EdgeInsets.only(left: 15, right: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    color: ColorManager.kSecondaryColor,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      const SizedBox(
-                          height: 50,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text(
-                                    AppStrings.userName,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  )))),
-                      SizedBox(
-                          height: 50,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    AppStrings.userRole,
-                                    style: TextStyle(
-                                      color: ColorManager.kTextColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  )))),
-                      SizedBox(
-                          height: 50,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    AppStrings.userComplay,
-                                    style: TextStyle(
-                                      color: ColorManager.kTextColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  )))),
-                      SizedBox(
-                          height: 50,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    AppStrings.userLocation,
-                                    style: TextStyle(
-                                      color: ColorManager.kTextColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  )))),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 210,
-                  margin: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    color: ColorManager.kSecondaryColor,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                          height: 50,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.person,
-                                    ),
-                                    Text(
-                                      AppStrings.privateInfo,
-                                      style: TextStyle(
-                                        color: ColorManager.kTextColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ))),
-                      SizedBox(
-                          height: 50,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 40),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.email,
-                                    ),
-                                    Text(
-                                      AppStrings.userEmail,
-                                      style: TextStyle(
-                                        color: ColorManager.kTextColor,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ))),
-                      SizedBox(
-                          height: 50,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 40),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.phone_android,
-                                    ),
-                                    Text(
-                                      AppStrings.userPhone,
-                                      style: TextStyle(
-                                        color: ColorManager.kTextColor,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ))),
-                      SizedBox(
-                          height: 50,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 40),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_city_outlined,
-                                    ),
-                                    Text(
-                                      AppStrings.userLocation,
-                                      style: TextStyle(
-                                        color: ColorManager.kTextColor,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ))),
-                    ],
-                  ),
-                )
-              ],
+              ),
             ),
-          )),
-        ));
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Text(
+                  AppStrings.userName,
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[900],
+                      fontSize: 16,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 37.0),
+                child: Text(
+                  'Scott Hamilton',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[600],
+                      fontSize: 14,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Text(
+                  'Role ',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[900],
+                      fontSize: 16,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 37.0),
+                child: Text(
+                  '   Social Engineer Of Google',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[600],
+                      fontSize: 14,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Text(
+                  'Company ',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[900],
+                      fontSize: 16,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 14.0),
+                child: Text(
+                  'Google Co Ltd',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[600],
+                      fontSize: 14,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Text(
+                  'Location ',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[900],
+                      fontSize: 16,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 14.0),
+                child: Text(
+                  '  Delhi, India',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[600],
+                      fontSize: 14,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 22.0),
+            child: Divider(),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 24.0),
+                child: Icon(Icons.person),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  'Private Information',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[700],
+                      fontSize: 17,
+                      letterSpacing: 0.5,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 54.0),
+                child: Icon(Icons.mail, color: Colors.grey[500]),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  'mathewsteven92@gmail.com',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[700],
+                      fontSize: 14,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 54.0),
+                child: Icon(Icons.phone, color: Colors.grey[500]),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  '+91 - 9560419114',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[700],
+                      fontSize: 14,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 54.0),
+                child: Icon(Icons.home_outlined, color: Colors.grey[500]),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  'RZ- 5167, Hari Nagar, New Delhi',
+                  style: GoogleFonts.lato(
+                      color: Colors.grey[700],
+                      fontSize: 14,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
