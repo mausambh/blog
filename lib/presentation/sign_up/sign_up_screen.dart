@@ -1,10 +1,10 @@
 import 'package:blog/presentation/resources/strings_manager.dart';
+import 'package:blog/presentation/sign_in/sign_in_controller/sign_in_controller.dart';
+import 'package:blog/presentation/sign_up/sign_up_controller/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../resources/routes_manager.dart';
-import '../sign_in/sign_in_controller/sign_in_controller.dart';
-import 'sign_up_controller/sign_up_controller.dart';
 // import 'package:login/extensions.dart';
 
 class RegisterFormClass extends StatefulWidget {
@@ -14,12 +14,8 @@ class RegisterFormClass extends StatefulWidget {
 }
 
 class _RegisterFormClassState extends State<RegisterFormClass> {
-  final TextEditingController username = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  final SignInController _signInController = Get.put(SignInController());
   final SignUpController _signUpController = Get.put(SignUpController());
-
+  final SignInController _signInController = Get.put(SignInController());
   // bool _isObscure = true;
 
   @override
@@ -38,7 +34,7 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
         backgroundColor: Colors.grey[300],
         body: SafeArea(
             child: Form(
-          key: _formKey,
+          key: _signUpController.formKey,
           child: ListView(children: [
             const SizedBox(height: 50),
             // logo
@@ -52,6 +48,7 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: _signUpController.username,
                       decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
@@ -74,6 +71,7 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                     const SizedBox(height: 25),
                     Obx(
                       () => TextFormField(
+                        controller: _signUpController.password,
                         obscureText: _signInController.isObscure.value,
                         decoration: InputDecoration(
                           enabledBorder: const OutlineInputBorder(
@@ -95,6 +93,7 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                           ),
                         ),
                         validator: (value) {
+                          _signUpController.checkPass = value!;
                           if (value == null || value.isEmpty) {
                             return 'Please enter password';
                           }
@@ -105,6 +104,7 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                     const SizedBox(height: 25),
                     Obx(
                       () => TextFormField(
+                        controller: _signUpController.confirmPass,
                         obscureText: _signUpController.isObscure.value,
                         decoration: InputDecoration(
                           enabledBorder: const OutlineInputBorder(
@@ -128,6 +128,8 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter password';
+                          } else if (_signUpController.checkPass != value) {
+                            return "Password not match";
                           }
                           return null;
                         },
@@ -135,6 +137,7 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                     ),
                     const SizedBox(height: 25),
                     TextFormField(
+                      controller: _signUpController.email,
                       decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
@@ -155,26 +158,26 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 25),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey.shade400),
-                        ),
-                        fillColor: Colors.grey.shade200,
-                        filled: true,
-                        hintText: 'Phone Number',
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppStrings.kPhoneNumberNullError;
-                        }
-                        return null;
-                      },
-                    ),
+                    // const SizedBox(height: 25),
+                    // TextFormField(
+                    //   decoration: InputDecoration(
+                    //     enabledBorder: const OutlineInputBorder(
+                    //       borderSide: BorderSide(color: Colors.white),
+                    //     ),
+                    //     focusedBorder: OutlineInputBorder(
+                    //       borderSide: BorderSide(color: Colors.grey.shade400),
+                    //     ),
+                    //     fillColor: Colors.grey.shade200,
+                    //     filled: true,
+                    //     hintText: 'Phone Number',
+                    //   ),
+                    //   validator: (value) {
+                    //     if (value == null || value.isEmpty) {
+                    //       return AppStrings.kPhoneNumberNullError;
+                    //     }
+                    //     return null;
+                    //   },
+                    // ),
                     const SizedBox(height: 25),
                     // GestureDetector(
                     //   child: Container(
@@ -200,9 +203,9 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                       child: ElevatedButton(
                         onPressed: () {
                           // Validate returns true if the form is valid, or false otherwise.
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.pushReplacementNamed(
-                                context, Routes.loginScreen);
+                          if (_signUpController.formKey.currentState!
+                              .validate()) {
+                            _signUpController.mapInputsLogin();
                             //   // If the form is valid, display a snackbar. In the real world,
                             //   // you'd often call a server or save the information in a database.
 

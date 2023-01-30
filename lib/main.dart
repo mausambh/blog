@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       color: ColorManager.kPrimaryColor,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
+        backgroundColor: ColorManager.kPrimaryColor,
       ),
       home: const HomePage(),
       onGenerateRoute: RouteGenerator.getRoute,
