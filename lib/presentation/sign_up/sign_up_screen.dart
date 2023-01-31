@@ -94,7 +94,7 @@ class _RegisterFormClassState extends State<RegisterFormClass> {
                         ),
                         validator: (value) {
                           _signUpController.checkPass = value!;
-                          if (value == null || value.isEmpty) {
+                          if (value.isEmpty) {
                             return 'Please enter password';
                           }
                           return null;

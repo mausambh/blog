@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -33,9 +31,7 @@ class SignUpController extends GetxController {
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
-      log("access success ${token!.username}");
-
-      Get.offAllNamed(Routes.mainScreen);
+      Get.offAllNamed(Routes.loginScreen);
     }
   }
 
